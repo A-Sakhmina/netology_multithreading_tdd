@@ -29,48 +29,52 @@ public class CreditCalculatorTest {
     }
 
     public static Stream<Arguments> sourceTotalAmount() {
-        return Stream.of(Arguments.of(10, 4, 10, 14.641),
-                Arguments.of(25_000, 5, 12, 44058.5421));
+//        return Stream.of(Arguments.of(10, 4, 10, 14.641),
+//                Arguments.of(25_000, 5, 12, 44058.542));
+        return Stream.of(Arguments.of(10, 4, 10, 14),
+                Arguments.of(25_000, 5, 12, 44058));
 
     }
 
     @ParameterizedTest
     @MethodSource("sourceTotalAmount")
-    public void testTotalAmount(int creditAmount, int loanTermInYears, int loanPercentAYear, double expected) {
+    public void testTotalAmount(int creditAmount, int loanTermInYears, double loanPercentAYear, int expected) {
         //given
         creditCalculator = new CreditCalculator(creditAmount, loanTermInYears, loanPercentAYear);
         //when
-        double result = creditCalculator.calculateTotalLoanAmount();
+        int result = creditCalculator.calculateTotalLoanAmount();
         //then
         Assertions.assertEquals(expected, result);
     }
 
     public static Stream<Arguments> sourceDif() {
-        return Stream.of(Arguments.of(10, 4, 10, 4.641),
-                Arguments.of(25_000, 5, 12, 19058.5421));
+//        return Stream.of(Arguments.of(10, 4, 10, 4.641),
+//                Arguments.of(25_000, 5, 12, 19058.542));
+        return Stream.of(Arguments.of(10, 4, 10, 4),
+                Arguments.of(25_000, 5, 12, 19058));
 
     }
 
     @ParameterizedTest
     @MethodSource("sourceDif")
-    public void testDif(int creditAmount, int loanTermInYears, int loanPercentAYear, double expected) {
+    public void testDif(int creditAmount, int loanTermInYears, double loanPercentAYear, int expected) {
         //given
         creditCalculator = new CreditCalculator(creditAmount, loanTermInYears, loanPercentAYear);
         //when
-        double result = creditCalculator.calculateDifference();
+        int result = creditCalculator.calculateDifference();
         //then
         Assertions.assertEquals(expected, result);
     }
 
     public static Stream<Arguments> sourceMonth() {
-        return Stream.of(Arguments.of(10, 4, 10, 0.305),
-                Arguments.of(25_000, 5, 12, 734.309035));
+        return Stream.of(Arguments.of(10, 4, 10, 0.291),
+                Arguments.of(25_000, 5, 12, 734.300));
 
     }
 
     @ParameterizedTest
     @MethodSource("sourceMonth")
-    public void testMonth(int creditAmount, int loanTermInYears, int loanPercentAYear, double expected) {
+    public void testMonth(int creditAmount, int loanTermInYears, double loanPercentAYear, double expected) {
         //given
         creditCalculator = new CreditCalculator(creditAmount, loanTermInYears, loanPercentAYear);
         //when
